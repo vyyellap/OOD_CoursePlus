@@ -3,10 +3,10 @@ body {
 }
 
 .main {
-    background-image: url('../images/SU_trans2.png'); /* 背景图片路径 */
-    background-size: cover; /* 让背景图铺满整个容器 */
-    background-color: rgba(255, 255, 255, 0.5); /* 半透明的白色背景 */
-    background-repeat: no-repeat; /* 防止背景图重复 */
+    /*background-image: url('../images/SU_trans2.png'); !* 背景图片路径 *!*/
+    /*background-size: cover; !* 让背景图铺满整个容器 *!*/
+    /*background-color: rgba(255, 255, 255, 0.5); !* 半透明的白色背景 *!*/
+    /*background-repeat: no-repeat; !* 防止背景图重复 *!*/
 
     margin: 30px;
 
@@ -57,7 +57,7 @@ body {
 .text-desc {
     font-size: 12px;
     font-weight: normal;
-    color: #999;
+    color: darkcyan;
 }
 
 .profile .section {
