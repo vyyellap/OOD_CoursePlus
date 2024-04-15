@@ -6,137 +6,92 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * User class
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User implements Serializable {
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-    @NotNull
-    @Column(name = "display_name")
-    private String displayName;
-
-    @NotNull
-    @Column(name = "username", unique = true)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
     private String username;
-
-    @NotNull
-    @Column(name = "gender")
-    private String gender;
-
-    @NotNull
-    @Column(name = "password")
     private String password;
+    private String firstname;
+    private String lastname;
+    private String role;
+    private String phone;
+    private String email;
+    //private String dob;
+    private java.sql.Date dob;
 
-    @NotNull
-    @Column(name = "active")
-    private Integer active;
-
-    @NotNull
-    @Column(name = "created_date")
-    private Date createdDate;
-
-    @Column(name = "last_modified_date")
-    private Date lastModifiedDate;
-
-    public User() {
-
+    public User(String firstname, String lastname, String role, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
+        this.email = email;
     }
 
-    public User(String displayName, String username, String gender, String password) {
-
-        this.displayName = displayName;
-        this.username = username;
-        this.gender = gender;
-        this.password = password;
-    }
-
-    // getters & setters
-    public Long getId() {
-
+    public int getId() {
         return id;
     }
-
-    public void setId(Long id) {
-
+    public void setId(int id) {
         this.id = id;
     }
-
-    public String getDisplayName() {
-
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-
-        this.displayName = displayName;
-    }
-
     public String getUsername() {
-
         return username;
     }
-
     public void setUsername(String username) {
-
         this.username = username;
     }
-
     public String getPassword() {
-
         return password;
     }
-
     public void setPassword(String password) {
-
         this.password = password;
     }
-
-    public Integer getActive() {
-
-        return active;
+    public String getFirstname() {
+        return firstname;
     }
-
-    public void setActive(Integer active) {
-
-        this.active = active;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
-
-    public Date getCreatedDate() {
-
-        return createdDate;
+    public String getLastname() {
+        return lastname;
     }
-
-    public void setCreatedDate(Date createdDate) {
-
-        this.createdDate = createdDate;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
-
-    public Date getLastModifiedDate() {
-
-        return lastModifiedDate;
+    public String getRole() {
+        return role;
     }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-
-        this.lastModifiedDate = lastModifiedDate;
+    public void setRole(String role) {
+        this.role = role;
     }
-
-    public String getGender() {
-
-        return gender;
+    public String getPhone() {
+        return phone;
     }
-
-    public void setGender(String gender) {
-
-        this.gender = gender;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    //	public String getDob() {
+//		return dob;
+//	}
+//	public void setDob(String dob) {
+//		this.dob = dob;
+//	}
+    public java.sql.Date getDob() {
+        return dob;
+    }
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 }

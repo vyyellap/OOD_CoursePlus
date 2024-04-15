@@ -6,13 +6,9 @@ import jakarta.persistence.*;
 @Entity
 public class Student extends User {
 
-    public Student() {
+    public Student(String firstName, String lastname, String role, String email) {
 
-    }
-
-    public Student(String displayName, String username, String gender, String password) {
-
-        super(displayName, username, gender, password);
+        super(firstName, lastname, role, email);
     }
 
 }

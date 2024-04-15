@@ -6,12 +6,8 @@ import jakarta.persistence.Entity;
 @Entity
 public class Administrator extends User {
 
-    public Administrator() {
+    public Administrator(String firstName, String lastName, String role, String email) {
 
-    }
-
-    public Administrator(String displayName, String username, String gender, String password) {
-
-        super(displayName, username, gender, password);
+        super(firstName, lastName, role, email);
     }
 }
