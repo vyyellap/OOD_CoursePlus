@@ -1,20 +1,49 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login - CoursePlus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CoursePlus - Login</title>
+
+    <th:block th:replace="parts/styles :: common"></th:block>
+
 </head>
-<body>
-<h2>Login</h2>
-<form action="/login" method="post">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+<body class="login">
+<div>
+
+    <div class="login_wrapper">
+        <section class="login_content">
+            <form th:action="@{/login}" method="post" id="loginform">
+                <h1>Login</h1>
+                <div>
+                    <input type="text" class="form-control" placeholder="Username" name="username" required/>
+                </div>
+                <div>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required/>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-default submit">Log in</button>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="separator">
+
+                    <div class="clearfix"></div>
+                    <br/>
+
+                    <div>
+                        <h1><i class="fa fa-pencil"></i> CoursePlus Login</h1>
+                    </div>
+                </div>
+            </form>
+        </section>
     </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-    </div>
-    <button type="submit">Login</button>
-</form>
+</div>
+
 </body>
 </html>
