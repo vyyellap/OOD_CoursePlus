@@ -1,45 +1,37 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>CoursePlus</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.ess">
-    <script src="is/bootstrap.min.js" type="application/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CoursePlus - Dashboard</title>
+
+    <th:block th:replace="parts/styles :: common"></th:block>
+
 </head>
-<body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <div
-    class="navbar-header">
-    <button type="button" class="navbar-toggle collapsed"
-    data-toggle="collapse"
-    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-    <span class="sr-only">CoursePLus</span>
-    </button>
-    <a class="navbar-brand" href="#">CoursePlus</a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="search questions">
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <th:block th:replace="parts/sidemenu :: menu"></th:block>
+        <th:block th:replace="parts/topmenu :: menu"></th:block>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <th:block th:replace="parts/toptiles :: tiles"></th:block>
+
         </div>
-        <button type="submit" class="btn btn-default">Search</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">Login</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="drapdown" role="button" aria-haspopup="true"
-                aria-expanded="false">Center<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Notification</a></li>
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <!-- /page content -->
+
+        <th:block th:replace="parts/footer :: footer"></th:block>
+
     </div>
-</nav>
+</div>
+
+<th:block th:replace="parts/scripts :: common"></th:block>
 </body>
 </html>
