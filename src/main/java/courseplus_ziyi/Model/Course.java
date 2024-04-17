@@ -1,54 +1,44 @@
 package courseplus_ziyi.Model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import javax.persistence.*;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Course {
+@Table(name = "course")
+public class Course implements Comparable<Course> {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String description;
+	@ManyToOne(optional = true)
+	private Lecturer lecturer;
+	@Transient
+	private boolean isSelected;
+	@Transient
+	private boolean visible = true;
+	@JsonIgnore
+	@ManyToMany(mappedBy = "courseList")
+	private List<Semester> semList;
 
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Id
-    private int id;
-    private String title;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modified;
-    @OneToMany(mappedBy="course", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Module> modules;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public Date getCreated() {
-        return created;
-    }
-    public void setCreated(Date created) {
-        //DateTime date = new DateTime(created);
-        this.created = created;
-    }
-    public Date getModified() {
-        return modified;
-    }
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
-    public List<Module> getModules() {
-        return modules;
-    }
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }
+	@Override
+	public int compareTo(Course o) {
+		// TODO Auto-generated method stub
+
+		return (int) (id - o.id);
+	}
+
+	public Course(String description) {
+		super();
+		this.description = description;
+	}
+
+
 }

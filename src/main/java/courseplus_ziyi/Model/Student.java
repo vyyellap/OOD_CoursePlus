@@ -1,14 +1,39 @@
 package courseplus_ziyi.Model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 
 @Entity
-public class Student extends User {
+@Data
+@Table(name = "student")
+@EqualsAndHashCode(callSuper = false)
+public class Student {
+	/**
+	 * 
+	 */
 
-    public Student(String firstName, String lastname, String role, String email) {
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue
+	private int id;
+	private String name;
+	private String rollNo;
+	@ManyToOne
+	private Semester semester;
+	@OneToOne
+	User user;
 
-        super(firstName, lastname, role, email);
-    }
+	public Student() {
+	}
+
+	public Student(String name, String rollno, String username, String password, String email) {
+		setUser(new User(username, password, email, false,"ROLE_STUDENT"));
+		this.name = name;
+		this.rollNo = rollno;
+
+	}
 
 }

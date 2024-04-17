@@ -1,97 +1,128 @@
 package courseplus_ziyi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-
-import java.io.Serializable;
-import java.sql.Date;
-
-/**
- * User class
- */
 @Entity
-public class User {
+@Table(name = "user")
+@NoArgsConstructor
+@ToString
+public class User implements UserDetails {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	protected String username;
+	protected String password;
+	private boolean isAdmin;
+	private String email;
+	private String role;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
-    private String username;
-    private String password;
-    private String firstname;
-    private String lastname;
-    private String role;
-    private String phone;
-    private String email;
-    //private String dob;
-    private java.sql.Date dob;
+	public User(String username, String password, String email, boolean isAdmin, String role) {
+		this.username = username;
+		this.password = password;
+		this.isAdmin = isAdmin;
+		this.email = email;
+		this.role = role;
+	}
 
-    public User(String firstname, String lastname, String role, String email) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-        this.email = email;
-    }
+	public User(int id, String username, String password, String email, boolean isAdmin, String role) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.isAdmin = isAdmin;
+		this.role = role;
+	}
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getFirstname() {
-        return firstname;
-    }
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-    public String getLastname() {
-        return lastname;
-    }
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    //	public String getDob() {
-//		return dob;
-//	}
-//	public void setDob(String dob) {
-//		this.dob = dob;
-//	}
-    public java.sql.Date getDob() {
-        return dob;
-    }
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
+	public int getId() {
+		return id;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	@JsonIgnore
+	public String getPassword() {
+		return password;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@JsonProperty
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return username;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		List<GrantedAuthority> authList = new ArrayList<>();
+		authList.add(new SimpleGrantedAuthority(role));
+		return authList;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 }
