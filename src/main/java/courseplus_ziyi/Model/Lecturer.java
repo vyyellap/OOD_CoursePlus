@@ -15,17 +15,16 @@ public class Lecturer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "name")
-	private String name;
+	private String department;
 	private String qualification;
 	@OneToOne
 	User user;
 
 
-	public Lecturer(String username, String password, String email, String qualification, String name) {
-		setUser(new User(username, password, email, false, "ROLE_LECTURER"));
-		this.name = name;
+	public Lecturer(String username,String password, String email, String qualification, String name, String department) {
+		setUser(new User(username, 	name,password, email, false, "ROLE_LECTURER"));
 		this.qualification = qualification;
+		this.department = department;
 	}
 
 }

@@ -22,10 +22,10 @@ public class CourseResource {
 		return courseManagementService.findAll();
 	}
 
-	@GetMapping("/sem/{id}")
-	public List<Course> getAllCoursesWithSemMapping(@PathVariable int id) {
-		return courseManagementService.findAll(id);
-	}
+//	@GetMapping("/sem/{id}")
+//	public List<Course> getAllCoursesWithSemMapping(@PathVariable int id) {
+//		return courseManagementService.findAll(id);
+//		}
 
 	@GetMapping("/list/{username}")
 	public List<Course> getAllCoursesInstr(@PathVariable String username) {

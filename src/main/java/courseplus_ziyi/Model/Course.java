@@ -16,7 +16,7 @@ import java.util.List;
 public class Course implements Comparable<Course> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long cId;
 	private String description;
 	@ManyToOne(optional = true)
 	private Lecturer lecturer;
@@ -25,14 +25,18 @@ public class Course implements Comparable<Course> {
 	@Transient
 	private boolean visible = true;
 	@JsonIgnore
-	@ManyToMany(mappedBy = "courseList")
-	private List<Semester> semList;
+	@ManyToMany(mappedBy = "courses")
+	private List<Student> students;
 
+	public Course(String description, Lecturer lecturer){
+	this.description = description;
+	this.lecturer = lecturer;
+	}
 	@Override
 	public int compareTo(Course o) {
 		// TODO Auto-generated method stub
 
-		return (int) (id - o.id);
+		return (int) (cId - o.cId);
 	}
 
 	public Course(String description) {

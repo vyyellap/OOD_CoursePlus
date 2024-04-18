@@ -9,18 +9,22 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class Semester {
 	@Id
 	@GeneratedValue
 	private int id;
 	private String semesterName;
-	private String semester;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "sem_course", joinColumns = { @JoinColumn(referencedColumnName = "id") }, inverseJoinColumns = {
-			@JoinColumn(referencedColumnName = "id") })
-	private List<Course> courseList;
+	private String semesterYear;
+//	@ManyToMany(cascade = CascadeType.ALL)
+////	@JoinTable(name = "sem_course", joinColumns = { @JoinColumn(referencedColumnName = "id") }, inverseJoinColumns = {
+////			@JoinColumn(referencedColumnName = "id") })
+////	private List<Course> courseList;
 
 
+	public Semester(String semesterName, String semesterYear) {
+		this.semesterName = semesterName;
+		this.semesterYear = semesterYear;
+	}
 }

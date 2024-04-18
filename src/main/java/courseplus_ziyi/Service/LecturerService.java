@@ -12,7 +12,9 @@ import java.util.List;
 @Service
 public class LecturerService {
 	@Autowired
-	LecturerRepo iRepo;
+	LecturerRepo lRepo;
+	@Autowired
+	UserService uService;
 //	@Autowired
 //	CourseService cService;
 
@@ -21,30 +23,31 @@ public class LecturerService {
 //	}
 
 	public Lecturer findInstByUserName(String userName) {
-		return iRepo.findByUserUsername(userName);
+		return lRepo.findByUserUsername(userName);
 	}
 
 	public List<Lecturer> getLecturers() {
-		List<Lecturer> instructors = iRepo.findAll();
+		List<Lecturer> instructors = lRepo.findAll();
 		return instructors;
 	}
 
-	public Lecturer save(Lecturer instructor) {
+	public Lecturer saveLecturer(Lecturer instructor) {
 
-		Lecturer tempInst = findInstByUserName(instructor.getUser().getUsername());
-		if (tempInst != null && tempInst.getId() != instructor.getId()) {
-			return null;
-		}
-		return iRepo.save(instructor);
+//		Lecturer tempInst = findInstByUserName(instructor.getUser().getUsername());
+//		if (tempInst != null && tempInst.getId() != instructor.getId()) {
+//			return null;
+//		}
+		uService.save(instructor.getUser());
+		return lRepo.save(instructor);
 	}
 
 	public void delete(int id) {
-		iRepo.deleteById(id);
+		lRepo.deleteById(id);
 	}
 
 	public Lecturer findInstById(int id) {
 		// TODO Auto-generated method stub
-		return iRepo.findById(id).get();
+		return lRepo.findById(id).get();
 	}
 
 }

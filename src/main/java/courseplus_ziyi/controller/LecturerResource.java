@@ -25,7 +25,7 @@ public class LecturerResource {
 	@PostMapping("/save")
 	public ResponseEntity<Lecturer> save(@RequestBody Lecturer instructor) {
 		
-		Lecturer i = iService.save(instructor);
+		Lecturer i = iService.saveLecturer(instructor);
 		if (i != null) {
 			return ResponseEntity.ok().body(i);
 		} else {

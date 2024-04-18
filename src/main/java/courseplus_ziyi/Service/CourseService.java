@@ -14,8 +14,8 @@ import java.util.List;
 public class CourseService {
 	@Autowired
 	CourseRepo repo;
-	@Autowired
-	SemesterService semService;
+//	@Autowired
+//	SemesterService semService;
 
 	@Autowired
 	LecturerService iService;
@@ -28,23 +28,23 @@ public class CourseService {
 		return repo.findAll();
 	}
 
-	public List<Course> findAll(int semId) {
-		List<Course> cList = findAll();
-		final List<Course> data = new ArrayList<>();
-		Semester sem = semService.findById(semId);
-		if (sem == null) {
-			return cList;
-		} else {
-			cList.forEach(c -> {
-				if (sem.getCourseList().contains(c)) {
-					c.setSelected(true);
-				}
-				data.add(c);
-			});
-		}
-		return data;
-
-	}
+//	public List<Course> findAll(int semId) {
+//		List<Course> cList = findAll();
+//		final List<Course> data = new ArrayList<>();
+//		Semester sem = semService.findById(semId);
+//		if (sem == null) {
+//			return cList;
+//		} else {
+//			cList.forEach(c -> {
+//				if (sem.getCourseList().contains(c)) {
+//					c.setSelected(true);
+//				}
+//				data.add(c);
+//			});
+//		}
+//		return data;
+//
+//	}
 
 	public List<Course> findCoursesByLecturerUserName(String userName) {
 		return repo.findByLecturerUserUsername(userName);
@@ -55,8 +55,8 @@ public class CourseService {
 		return repo.findById(id).get();
 	}
 
-	public Course saveCourse(Course c, String userName) {
-		c.setLecturer(iService.findInstByUserName(userName));
+	public Course saveCourse(Course c, String userNameOfProfessor) {
+		c.setLecturer(iService.findInstByUserName(userNameOfProfessor));
 		repo.save(c);
 		return c;
 	}
