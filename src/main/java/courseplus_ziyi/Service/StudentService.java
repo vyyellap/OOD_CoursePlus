@@ -2,13 +2,11 @@ package courseplus_ziyi.Service;
 
 
 import courseplus_ziyi.Model.Course;
-import courseplus_ziyi.Model.Semester;
 import courseplus_ziyi.Model.Student;
 import courseplus_ziyi.Repository.CourseRepo;
 import courseplus_ziyi.Repository.SemesterRepo;
 import courseplus_ziyi.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,17 +29,28 @@ public class StudentService {
 	@Autowired
 	UserService uService;
 
-	public void saveStudent(Student s) {
+	public List<Student> getAllStudents(){
+		return sRepo.findAll();
+	}
+
+
+	public Optional<Student> getStudent(int id){
+		return sRepo.findById(id);
+	}
+
+	public Student saveStudent(Student s) {
 		uService.save(s.getUser());
 		semRepo.save(s.getSemester());
-		sRepo.save(s);
+		return sRepo.save(s);
 	}
 
 	@Transactional
-	public void enrollCourse(String rollNo, Long courseId){
+	public String enrollCourse(String rollNo, Long courseId){
 		Optional<Course> courseToEnroll = cRepo.findById(courseId);
 		 Optional<Student>  studentFound = sRepo.findByRollNo(rollNo);
-		 studentFound.get().getCourses().add(courseToEnroll.get());
-
+		 List<Course> existingCourse = studentFound.get().getCourses();
+		 if(existingCourse.contains(courseToEnroll.get())) return "Already Enrolled in this Course !";
+		 else existingCourse.add(courseToEnroll.get());
+		return "Student has been enrolled in the course with ID = "+ courseId +" and Name = "+courseToEnroll.get().getDescription();
 	}
 }

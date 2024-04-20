@@ -16,7 +16,7 @@ import java.util.List;
 public class Course implements Comparable<Course> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cId;
+	private Long id;
 	private String description;
 	@ManyToOne(optional = true)
 	private Lecturer lecturer;
@@ -24,7 +24,7 @@ public class Course implements Comparable<Course> {
 	private boolean isSelected;
 	@Transient
 	private boolean visible = true;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany(mappedBy = "courses")
 	private List<Student> students;
 
@@ -36,7 +36,7 @@ public class Course implements Comparable<Course> {
 	public int compareTo(Course o) {
 		// TODO Auto-generated method stub
 
-		return (int) (cId - o.cId);
+		return (int) (id - o.id);
 	}
 
 	public Course(String description) {

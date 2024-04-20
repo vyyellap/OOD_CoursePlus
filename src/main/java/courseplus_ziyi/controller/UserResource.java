@@ -80,8 +80,9 @@ public class UserResource {
 
 	@GetMapping("/users")
 	public List<User> getUsers() {
-		System.out.println("Getting all users ");
-		return userService.getAllUsers();
+		List<User> allUsers = userService.getAllUsers();
+		System.out.println("Getting all users " + allUsers);
+		return allUsers;
 	}
 
 	@PostMapping("/users")
@@ -119,4 +120,6 @@ public class UserResource {
 
 		return "All Password encoded successfully";
 	}
+
+
 }

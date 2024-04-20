@@ -1,6 +1,7 @@
 package courseplus_ziyi.Repository;
 
 import courseplus_ziyi.Model.Course;
+import courseplus_ziyi.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,4 +18,6 @@ public interface CourseRepo extends JpaRepository<Course, Long> {
 
 	@Query(value = "select id from course where description like %:value%", nativeQuery = true)
 	List<Integer> searchCoursesByDescription(@PathVariable String value);
-}
+
+	List<Student> findStudentsById(Long id);
+ }

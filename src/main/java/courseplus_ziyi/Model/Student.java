@@ -1,5 +1,6 @@
 package courseplus_ziyi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,7 +31,8 @@ public class Student{
 
 		@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "student_course", joinColumns = { @JoinColumn(referencedColumnName = "sId") }, inverseJoinColumns = {
-			@JoinColumn(referencedColumnName = "cId") })
+			@JoinColumn(referencedColumnName = "id") })
+		@JsonIgnore
 	private List<Course> courses;
 
 	public Student() {

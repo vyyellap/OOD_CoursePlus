@@ -43,7 +43,8 @@ public class UserService implements UserDetailsService {
 
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
-		return repo.findAll();
+		List<User> allUsers= repo.findAll();
+		return allUsers;
 	}
 
 	public User save(User user) {

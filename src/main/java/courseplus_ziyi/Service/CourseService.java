@@ -3,6 +3,7 @@ package courseplus_ziyi.Service;
 
 import courseplus_ziyi.Model.Course;
 import courseplus_ziyi.Model.Semester;
+import courseplus_ziyi.Model.Student;
 import courseplus_ziyi.Repository.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,11 @@ public class CourseService {
 //
 //	}
 
+	public List<Student> findStduentsByCourseId(Long id){
+		return repo.findById(id).get().getStudents();
+	}
+
+
 	public List<Course> findCoursesByLecturerUserName(String userName) {
 		return repo.findByLecturerUserUsername(userName);
 
@@ -70,4 +76,8 @@ public class CourseService {
 		// TODO Auto-generated method stub
 		return repo.searchCoursesByDescription(value);
 	}
+
+
+
+
 }

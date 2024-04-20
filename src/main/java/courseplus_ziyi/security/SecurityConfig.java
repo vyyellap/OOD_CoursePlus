@@ -30,11 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private JwtFilter jwtFilter;
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.userDetailsService(userService);
-	}
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//		auth.userDetailsService(userService);
+//	}
 
 	@Override
 	@Bean

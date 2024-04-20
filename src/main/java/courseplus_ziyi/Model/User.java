@@ -48,6 +48,13 @@ public class User extends BaseUser {
 		this.role = role;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public String getRole() {
+		return role;
+	}
 	public int getId() {
 		return id;
 	}
@@ -56,7 +63,7 @@ public class User extends BaseUser {
 		return isAdmin;
 	}
 
-	@Override
+	@Override @JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
 	}
@@ -68,10 +75,10 @@ public class User extends BaseUser {
 
 	@Override
 	public String getUsername() {
-		return null;
+		return username;
 	}
 
-	@JsonIgnore
+//	@JsonIgnore
 	public String getName() {
 		return name;
 	}

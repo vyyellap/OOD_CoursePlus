@@ -2,6 +2,8 @@ package courseplus_ziyi.controller;
 
 
 import courseplus_ziyi.Model.Lecturer;
+import courseplus_ziyi.Model.Student;
+import courseplus_ziyi.Model.UserDetails;
 import courseplus_ziyi.Service.LecturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,15 @@ public class LecturerResource {
 
 	@Autowired
 	LecturerService iService;
+
+	@PostMapping("/register")
+	public String registerUser(@RequestBody UserDetails s){
+
+		Lecturer newLecturer = iService.saveLecturer(new Lecturer(s.getUsername(), s.getPassword(),s.getEmail(),s.getQualification(),s.getName(),s.getDepartment()));
+		if(newLecturer == null)return "Lecturer Registration Failed";
+		else
+			return  "Lecturer  Registered Successfully";
+	}
 
 	@GetMapping("")
 	public List<Lecturer> getAllLecturers() {

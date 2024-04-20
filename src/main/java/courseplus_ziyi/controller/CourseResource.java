@@ -1,6 +1,7 @@
 package courseplus_ziyi.controller;
 
 import courseplus_ziyi.Model.Course;
+import courseplus_ziyi.Model.Student;
 import courseplus_ziyi.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,11 @@ public class CourseResource {
 	@GetMapping("/list/{username}")
 	public List<Course> getAllCoursesInstr(@PathVariable String username) {
 		return courseManagementService.findCoursesByLecturerUserName(username);
+	}
+
+	@GetMapping("/{id}/students")
+	public List<Student> getAllStudentsInCourse(@PathVariable("id") Long courseId) {
+		return courseManagementService.findStduentsByCourseId(courseId);
 	}
 
 	@GetMapping("/search/{value}")
@@ -67,4 +73,6 @@ public class CourseResource {
 		Course createdCourse = courseManagementService.saveCourse(course);
 		return new ResponseEntity<Course>(createdCourse, HttpStatus.OK);
 	}
+
+
 }
