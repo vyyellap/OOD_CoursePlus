@@ -50,7 +50,7 @@ public class UserResource {
 //		}
 //	}
 
-	@PostMapping("/auth")
+	@PostMapping("/login")
 	public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
 
 		try {
@@ -61,7 +61,7 @@ public class UserResource {
 					)
 			);
 		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
+			return new JwtResponse("","INVALID CREDENTIALS");
 		}
 
 		final UserDetails userDetails
@@ -70,7 +70,7 @@ public class UserResource {
 		final String token =
 				jwtUtility.generateToken(userDetails);
 
-		return  new JwtResponse(token);
+		return  new JwtResponse(token,"Credentials VERIFIED. LOGIN SUCCESSFUL !!!");
 	}
 
 	@PostMapping("/auth/check-password")

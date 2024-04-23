@@ -24,9 +24,9 @@ public class StudentResource {
 	public String registerUser(@RequestBody UserDetails s){
 
 		Student newStudent = studentService.saveStudent(new Student(s.getName(), s.getRollNo(),s.getUsername(), s.getPassword(),s.getEmail(),s.getSemName(),s.getSemYear()));
-		if(newStudent == null)return "Student Registration Failed";
+		if(newStudent == null) return "FAILED !!! Student Registration FAILED";
 		else
-			return  "Student Registered Successfully";
+			return  "SUCCESS !!! Student Registered Successfully";
 	}
 	@GetMapping("/all")
 	public List<Student> getAllUsers(){

@@ -43,7 +43,7 @@ public class CoursePlusApplication  implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        uService.save(new User("som123","som", "som123", "som@gmail.com", false, "LECTURER"));
         sService.saveStudent(new Student("Abhir","10","abhirmhjn","Abhir","abhir@gmail.com","Fall","2024"));
-        sService.saveStudent(new Student("Mhjn","11","mhjn","Abhir","abhir@gmail.com","Spring","2025"));
+        sService.saveStudent(new Student("Mhjn","11","mhjn","Abhir","abhi@gmail.com","Spring","2025"));
         lService.saveLecturer(new Lecturer("prof_abc","abc","abc@gmail.com","PHD","Dr. PHD","CSE"));
         lService.saveLecturer(new Lecturer("Ass_prof_YU","yu","yu@gmail.com","MS","Dr. ZU","CSE"));
         lService.saveLecturer(new Lecturer("Prof_BAC","bac","bac@gmail.com","PHD","Dr. BAC","EM"));

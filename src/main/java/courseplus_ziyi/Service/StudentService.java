@@ -9,6 +9,7 @@ import courseplus_ziyi.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +40,15 @@ public class StudentService {
 	}
 
 	public Student saveStudent(Student s) {
-		uService.save(s.getUser());
-		semRepo.save(s.getSemester());
-		return sRepo.save(s);
+		try {
+			uService.save(s.getUser());
+			semRepo.save(s.getSemester());
+			return sRepo.save(s);
+		}
+		catch(Exception e){
+			e.getMessage();
+			return null;
+		}
 	}
 
 	@Transactional

@@ -25,7 +25,7 @@ public class LecturerResource {
 		Lecturer newLecturer = iService.saveLecturer(new Lecturer(s.getUsername(), s.getPassword(),s.getEmail(),s.getQualification(),s.getName(),s.getDepartment()));
 		if(newLecturer == null)return "Lecturer Registration Failed";
 		else
-			return  "Lecturer  Registered Successfully";
+			return  "Lecturer Registered Successfully";
 	}
 
 	@GetMapping("")

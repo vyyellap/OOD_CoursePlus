@@ -27,6 +27,7 @@ public class User extends BaseUser {
 	private String name;
 	protected String password;
 	private boolean isAdmin;
+	@Column(unique=true)
 	private String email;
 	private String role;
 
