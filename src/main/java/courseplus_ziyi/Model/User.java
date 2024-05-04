@@ -13,10 +13,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+// INHERITANCE
+// Extending the properties/features of other class
+// Here, we are inheriting the features of "BaseUser" Class in "User" class
+// Here,"BaseUser" is Parent class, and "User" is Child class
+
 @Entity
 @Table(name = "user")
 @NoArgsConstructor
-@ToString
 public class User extends BaseUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,4 +107,32 @@ public class User extends BaseUser {
 		this.isAdmin = isAdmin;
 	}
 
+
+	// POLYMORPHISM
+	// It allows us to perform a single action in different ways
+	// Here, we are overriding the toString(), a method in "Object" class which return the Hash Values of Objects
+	// But, here we have Overridden the toString(), and given new Implementation according to our need
+	// So, if we don't override "toString()", it will by default use the implementation given in
+	// the "Object" class and give us the Hash values of the objects.
+	@Override
+	public String toString() {
+		return "User Details are as follows :" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", isAdmin=" + isAdmin +
+				", email='" + email + '\'' +
+				", role='" + role + '\'';
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 }
