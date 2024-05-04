@@ -1,142 +1,138 @@
 package courseplus_ziyi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+// INHERITANCE
+// Extending the properties/features of other class
+// Here, we are inheriting the features of "BaseUser" Class in "User" class
+// Here,"BaseUser" is Parent class, and "User" is Child class
 
-import java.io.Serializable;
-import java.util.Date;
-
-/**
- * User class
- */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User implements Serializable {
+@Table(name = "user")
+@NoArgsConstructor
+public class User extends BaseUser {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(unique=true)
+	protected String username;
+	@Column(name = "name")
+	private String name;
+	protected String password;
+	private boolean isAdmin;
+	@Column(unique=true)
+	private String email;
+	private String role;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	public User(String username, String name, String password, String email, boolean isAdmin, String role) {
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.isAdmin = isAdmin;
+		this.email = email;
+		this.role = role;
+	}
 
-    @NotNull
-    @Column(name = "display_name")
-    private String displayName;
+	public User(int id, String username, String password, String email, boolean isAdmin, String role) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.isAdmin = isAdmin;
+		this.role = role;
+	}
 
-    @NotNull
-    @Column(name = "username", unique = true)
-    private String username;
+	public String getEmail() {
+		return email;
+	}
 
-    @NotNull
-    @Column(name = "gender")
-    private String gender;
+	public String getRole() {
+		return role;
+	}
+	public int getId() {
+		return id;
+	}
 
-    @NotNull
-    @Column(name = "password")
-    private String password;
+	public boolean isAdmin() {
+		return isAdmin;
+	}
 
-    @NotNull
-    @Column(name = "active")
-    private Integer active;
+	@Override @JsonIgnore
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
 
-    @NotNull
-    @Column(name = "created_date")
-    private Date createdDate;
+	@JsonIgnore
+	public String getPassword() {
+		return password;
+	}
 
-    @Column(name = "last_modified_date")
-    private Date lastModifiedDate;
+	@Override
+	public String getUsername() {
+		return username;
+	}
 
-    public User() {
+//	@JsonIgnore
+	public String getName() {
+		return name;
+	}
 
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public User(String displayName, String username, String gender, String password) {
+	@JsonProperty
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-        this.displayName = displayName;
-        this.username = username;
-        this.gender = gender;
-        this.password = password;
-    }
+	@JsonProperty
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    // getters & setters
-    public Long getId() {
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
-        return id;
-    }
 
-    public void setId(Long id) {
+	// POLYMORPHISM
+	// It allows us to perform a single action in different ways
+	// Here, we are overriding the toString(), a method in "Object" class which return the Hash Values of Objects
+	// But, here we have Overridden the toString(), and given new Implementation according to our need
+	// So, if we don't override "toString()", it will by default use the implementation given in
+	// the "Object" class and give us the Hash values of the objects.
+	@Override
+	public String toString() {
+		return "User Details are as follows :" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", isAdmin=" + isAdmin +
+				", email='" + email + '\'' +
+				", role='" + role + '\'';
+	}
 
-        this.id = id;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    public String getDisplayName() {
-
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-
-        this.displayName = displayName;
-    }
-
-    public String getUsername() {
-
-        return username;
-    }
-
-    public void setUsername(String username) {
-
-        this.username = username;
-    }
-
-    public String getPassword() {
-
-        return password;
-    }
-
-    public void setPassword(String password) {
-
-        this.password = password;
-    }
-
-    public Integer getActive() {
-
-        return active;
-    }
-
-    public void setActive(Integer active) {
-
-        this.active = active;
-    }
-
-    public Date getCreatedDate() {
-
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getGender() {
-
-        return gender;
-    }
-
-    public void setGender(String gender) {
-
-        this.gender = gender;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 }

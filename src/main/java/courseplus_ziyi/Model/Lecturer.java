@@ -1,16 +1,30 @@
 package courseplus_ziyi.Model;
 
-import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Lecturer extends User {
+@Table(name = "instructor")
+public class Lecturer {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String department;
+	private String qualification;
+	@OneToOne
+	User user;
 
-    public Lecturer() {
 
-    }
+	public Lecturer(String username,String password, String email, String qualification, String name, String department) {
+		setUser(new User(username, 	name,password, email, false, "ROLE_LECTURER"));
+		this.qualification = qualification;
+		this.department = department;
+	}
 
-    public Lecturer(String displayName, String username, String gender, String password) {
-
-        super(displayName, username, gender, password);
-    }
 }
